@@ -12,15 +12,17 @@
         android:id="@+id/TextView01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="13dp"
         android:gravity="center_horizontal|center"
         android:text="Bienvenido"
         android:textColor="#3789E1"
         android:textSize="35sp" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/tvNombreUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="13dp"
         android:gravity="center_horizontal|center"
         android:text="User"
         android:textColor="#3789E1"
@@ -43,7 +45,7 @@
         <!-- Create new report -->
 
         <ImageButton
-            android:id="@+id/btnCrearReporte"
+            android:id="@+id/btnNewTest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
@@ -51,7 +53,7 @@
             android:src="@drawable/add" />
 
         <TextView
-            android:id="@+id/tvNuevoReport"
+            android:id="@+id/tvNewTest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="1dp"
@@ -83,7 +85,7 @@
         <!-- Create new report -->
 
         <ImageButton
-            android:id="@+id/btnCrearReporte"
+            android:id="@+id/btnScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
@@ -91,7 +93,7 @@
             android:src="@drawable/add" />
 
         <TextView
-            android:id="@+id/tvNuevoReport"
+            android:id="@+id/tvScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="1dp"
@@ -109,6 +111,12 @@
  			android:layout_height="1dp"
  			android:background="#E6E6E6" 
  			android:layout_marginTop="5dp"/>
+
+   	 	<ListView
+   	 	    android:id="@+id/listView1"
+   	 	    android:layout_width="match_parent"
+   	 	    android:layout_height="wrap_content" >
+   	 	</ListView>
 
 </LinearLayout>
 

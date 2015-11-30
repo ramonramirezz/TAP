@@ -27,23 +27,44 @@ public final class R {
     }
     public static final class id {
         public static final int TextView01=0x7f080005;
-        public static final int action_settings=0x7f08000c;
-        public static final int btnCrearReporte=0x7f080007;
+        public static final int action_settings=0x7f08001e;
+        public static final int btnAceptar=0x7f08001c;
+        public static final int btnCancelar=0x7f08001d;
+        public static final int btnEnviar=0x7f08000e;
         public static final int btnIniciar=0x7f080003;
+        public static final int btnNewTest=0x7f080007;
         public static final int btnRegrist=0x7f080004;
+        public static final int btnScore=0x7f080009;
         public static final int edContra=0x7f080002;
+        public static final int edContra1=0x7f08001b;
+        public static final int edNombre=0x7f08001a;
         public static final int edUsuario=0x7f080001;
         public static final int imLogo=0x7f080000;
-        public static final int linear_scroll=0x7f08000a;
+        public static final int imageView1=0x7f080019;
+        public static final int linear_scroll=0x7f08000d;
         public static final int listView1=0x7f08000b;
-        public static final int scroll=0x7f080009;
-        public static final int textView1=0x7f080006;
-        public static final int tvNuevoReport=0x7f080008;
+        public static final int pregunta=0x7f080012;
+        public static final int radiogroup=0x7f080013;
+        public static final int rdAlgunas=0x7f080016;
+        public static final int rdBastantes=0x7f080017;
+        public static final int rdNunca=0x7f080014;
+        public static final int rdRara=0x7f080015;
+        public static final int rdSiempre=0x7f080018;
+        public static final int scroll=0x7f08000c;
+        public static final int tvActualScore=0x7f080010;
+        public static final int tvFecha=0x7f08000f;
+        public static final int tvNewTest=0x7f080008;
+        public static final int tvNombreUsuario=0x7f080006;
+        public static final int tvResultado=0x7f080011;
+        public static final int tvScore=0x7f08000a;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int bienvenido=0x7f030001;
         public static final int encuesta_new=0x7f030002;
+        public static final int pop_score=0x7f030003;
+        public static final int pregunta=0x7f030004;
+        public static final int registro=0x7f030005;
     }
     public static final class menu {
         public static final int main=0x7f070000;
@@ -80,5 +101,6 @@ public final class R {
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f060001;
+        public static final int AppTheme_CustomTheme=0x7f060002;
     }
 }

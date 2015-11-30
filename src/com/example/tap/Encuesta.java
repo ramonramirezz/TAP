@@ -1,9 +1,18 @@
 package com.example.tap;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
+import com.example.adapters.CustomAdapterPregunta;
+import com.example.adapters.ItemPregunta;
+
+import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -15,6 +24,7 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 public class Encuesta extends Activity {
     
@@ -43,36 +53,80 @@ public class Encuesta extends Activity {
 	
 	private LinearLayout mLnScroll;
 	private ListView mListView;
-	private ArrayList<String> myArrayList;
-	private ArrayList<String> myArrayListTemp;
+	private ArrayList<ItemPregunta> myArrayListTemp;
 	LinearLayout ln;
 	int rowSize = 5;
+	
+	private CustomAdapterPregunta adapter;
+	private List<ItemPregunta> dataList;
+	
+	private Button enviar;
+	String id;
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.encuesta_new);
         
+		ActionBar actionBar = getActionBar();
+		actionBar.setTitle("Encuesta");
+		actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3789E1")));
+		
+        id = getIntent().getStringExtra("id_user");	
+        
         mLnScroll = (LinearLayout) findViewById(R.id.linear_scroll);
         mListView = (ListView) findViewById(R.id.listView1);
         
-        myArrayList = new ArrayList<String>();
-        myArrayListTemp = new ArrayList<String>();
+        dataList = new ArrayList<ItemPregunta>();
+        myArrayListTemp = new ArrayList<ItemPregunta>();
         
-    
+        enviar = (Button) findViewById(R.id.btnEnviar);
+        enviar.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v){
+				int score = 0;
+				for (int i = 0; i < dataList.size(); i++) {
+					score += dataList.get(i).getScore();
+				}
+				
+				try {
+					Conexion con = new Conexion(Encuesta.this);
+					con.abrir();
+					boolean status = con.setHistory(id, Integer.toString(score), date());
+					con.cerrar();
+					
+					if (status) {
+						Toast toast = Toast.makeText(getApplicationContext(), "Test enviado", Toast.LENGTH_SHORT);
+						toast.show();		
+						Intent i = new Intent (Encuesta.this, Bienvenido.class);
+						i.putExtra("id_user", id);
+						startActivity(i);
+					}else{
+						Toast toast = Toast.makeText(getApplicationContext(), "Error al enviar test", Toast.LENGTH_SHORT);
+						toast.show();						
+					}
+
+				} catch (Exception e) {
+					// TODO: handle exception
+					Toast toast = Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT);
+					toast.show();
+				}
+			}
+		});
         
-        for (String quest : question){
-        	myArrayList.add(quest);
+        for (String  quest : question){
+        	dataList.add(new ItemPregunta(quest));
         }
 
-        int rem = myArrayList.size() % rowSize;
+        int rem = dataList.size() % rowSize;
         if (rem > 0) {
 			for (int i = 0; i < rowSize - rem; i++) {
-				myArrayList.add("");
+				dataList.add(new ItemPregunta(""));
 			}
 		}
         addItem(0);
         
-        int size = myArrayList.size() / rowSize;
+        int size = dataList.size() / rowSize;
         
         for (int i = 0; i < size; i++) {
 			final int k;
@@ -99,35 +153,34 @@ public class Encuesta extends Activity {
     private void addItem(int i) {
 		// TODO Auto-generated method stub
 		myArrayListTemp.clear();
+		
 		i = i * rowSize;
 		for (int j = 0; j < rowSize; j++) {
-			myArrayListTemp.add(j, myArrayList.get(i));
+			myArrayListTemp.add(j, dataList.get(i));
 			i = i + 1;
 		}
-		setView();
+		setView(myArrayListTemp);
 	}
 
 
-	private void setView() {
+	private void setView(ArrayList<ItemPregunta> dataList) {
 		// TODO Auto-generated method stub
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(Encuesta.this, android.R.layout.simple_list_item_1, myArrayListTemp);
+		
+		
+	   
+	    for (int i = 0; i < dataList.size(); i++) {
+			if (dataList.get(i).getPregunta().equals("")) {
+				dataList.remove(i);
+			}
+		}
+        if (dataList.get(dataList.size() - 1).getPregunta().equals("")) {
+			dataList.remove(dataList.size()-1);
+		}
+        
+	    adapter = new CustomAdapterPregunta(this, R.layout.pregunta, dataList);
 	    mListView.setAdapter(adapter);
-	 
-	    
 	}
     
-//	private void createRadiosButtons(){
-//		final RadioButton[] rb = new RadioButton[5]; 
-//		RadioGroup rg = new RadioGroup(this);
-//		rg.setOrientation(RadioGroup.HORIZONTAL);
-//		for (int i = 0; i < rb.length; i++) {
-//			rb[i] = new RadioButton(this);
-//			rg.addView(rb[i]);
-//			rb[i].setText("Test");
-//		}
-//		ln.addView(rg);
-//		
-//	}
 
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -135,5 +188,14 @@ public class Encuesta extends Activity {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-    
+
+
+	public String date(){
+		String date = "";
+		
+		SimpleDateFormat  dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Date fecha = new Date();
+		date = dateFormat.format(fecha);
+		return date;
+	}
 }

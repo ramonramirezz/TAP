@@ -5,8 +5,8 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
-        android:targetSdkVersion="17" />
+        android:minSdkVersion="11"
+        android:targetSdkVersion="18" />
 
     <application
         android:allowBackup="true"
@@ -24,6 +24,10 @@
         </activity>
         <activity android:name="Bienvenido"></activity>
         <activity android:name="Encuesta"></activity>
+        <activity android:name="RegistrarActivity"></activity>
+        <activity android:name="PopScore"
+            android:theme="@style/AppTheme.CustomTheme"
+            ></activity>
     </application>
 
 </manifest>

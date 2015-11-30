@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#3789E1" >
+    
+
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="102dp"
+            android:layout_height="102dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/user" />
+        
+         <EditText
+             android:id="@+id/edNombre"
+             android:layout_width="298dp"
+             android:layout_height="41dp"
+             android:layout_gravity="center"
+             android:layout_marginTop="15dp"
+             android:background="#FFFFFF"
+             android:gravity="center"
+             android:hint="Nombre Completo"
+             android:textColorLink="#000"
+             android:fontFamily="sans-serif-condensed" />
+                
+         <EditText
+             android:id="@+id/edUsuario"
+             android:layout_width="298dp"
+             android:layout_height="41dp"
+             android:layout_gravity="center"
+             android:layout_marginTop="5dp"
+             android:background="#FFFFFF"
+             android:gravity="center"
+             android:hint="Usuario"
+             android:textColorLink="#000"
+             android:fontFamily="sans-serif-condensed" />
+        
+         <EditText
+             android:id="@+id/edContra"
+             android:layout_width="298dp"
+             android:layout_height="41dp"
+             android:layout_gravity="center"
+             android:layout_marginTop="5dp"
+             android:background="#FFFFFF"
+             android:gravity="center"
+             android:hint="Contraseña"
+             android:inputType="textPassword"
+             android:textColorLink="#000"
+             android:fontFamily="sans-serif-condensed" />
+         
+          <EditText
+              android:id="@+id/edContra1"
+              android:layout_width="299dp"
+              android:layout_height="41dp"
+              android:layout_gravity="center"
+              android:layout_marginTop="5dp"
+              android:background="#FFFFFF"
+              android:gravity="center"
+              android:hint="Repetir Contraseña"
+              android:inputType="textPassword"
+              android:textColorLink="#000"
+              android:fontFamily="sans-serif-condensed" />
+  
+          <Button
+              android:id="@+id/btnAceptar"
+              android:layout_width="297dp"
+              android:layout_height="wrap_content"
+              android:layout_gravity="center"
+              android:layout_marginTop="15dp"
+              android:background="#3775B7"
+              android:text="Aceptar"
+              android:textColor="#FFFFFF"
+              android:fontFamily="sans-serif-condensed" />
+           <Button
+              android:id="@+id/btnCancelar"
+              android:layout_width="297dp"
+              android:layout_height="wrap_content"
+              android:layout_gravity="center"
+              android:layout_marginTop="2dp"
+              android:background="#3775B7"
+              android:text="Cancelar"
+              android:textColor="#FFFFFF"
+              android:fontFamily="sans-serif-condensed" />
+
+   
+    
+
+</LinearLayout>

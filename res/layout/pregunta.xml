@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginLeft= "5dp"
+    android:layout_marginRight= "5dp" >
+
+    <TextView
+        android:id="@+id/pregunta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Siente que su familiar le pide más ayuda de la que realmente necesita?"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_marginBottom= "5dp" />
+
+    <RadioGroup
+        android:id="@+id/radiogroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/rdNunca"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:text="Nunca" />
+
+        <RadioButton
+            android:id="@+id/rdRara"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:text="Rara Vez" />
+
+        <RadioButton
+            android:id="@+id/rdAlgunas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Algunas Veces"
+            android:checked="false" />
+
+        <RadioButton
+            android:id="@+id/rdBastantes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bastantes Veces"
+            android:checked="false" />
+
+        <RadioButton
+            android:id="@+id/rdSiempre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Casi Siempre"
+            android:checked="false" />
+    </RadioGroup>
+
+</LinearLayout>
