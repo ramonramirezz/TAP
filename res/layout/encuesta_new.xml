@@ -18,11 +18,13 @@
     android:padding="5dp"
     >
 
-                    <Button
-                        android:id="@+id/btnEnviar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Enviar" />
+<!--                     <Button -->
+<!--                         android:id="@+id/btnEnviar" -->
+<!--                         android:layout_width="wrap_content" -->
+<!--                         android:layout_height="wrap_content" -->
+<!--                         android:textColor="#FFFFFF" -->
+<!--                         android:background="#3789E1" -->
+<!--                         android:text="Enviar" /> -->
 
     </LinearLayout>
     

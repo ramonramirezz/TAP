@@ -41,16 +41,16 @@ public class PopScore extends Activity{
        
         
         if (score >= 0  && score <= 20) {
-			_califa.setText("Little or no burden");
+			_califa.setText("Poco o ningun agobio");
 		}
         if (score >= 21  && score <= 40) {
-			_califa.setText("Mild to moderate burden ");
+			_califa.setText("Leve a moderando agobio ");
 		}
         if (score >= 41  && score <= 60) {
-			_califa.setText("Moderate to severe burden ");
+			_califa.setText("Moderado a intenso agobio ");
 		}
         if (score >= 61  && score <= 88) {
-			_califa.setText("Severe burden ");
+			_califa.setText("Intenso burden ");
 		}
 	}
 	

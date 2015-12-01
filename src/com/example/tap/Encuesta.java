@@ -7,7 +7,7 @@ import java.util.List;
 
 import com.example.adapters.CustomAdapterPregunta;
 import com.example.adapters.ItemPregunta;
-
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
@@ -26,30 +26,31 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+@SuppressLint("NewApi")
 public class Encuesta extends Activity {
     
-	String[] question = {"¿Siente que su familiar le pide más ayuda de la que realmente necesita?", 
-			"¿Siente que debido al tiempo que dedica a su familiar no tiene suficiente tiempo para usted?",
-			"¿Se siente agobiado entre cuidar a su familiar y tratar de cumplir otras responsabilidades en su trabajo o su familia?",
-			"¿Se siente avergonzado por la conducta de su familiar?",
-			"¿Se siente irritado(a) (molesto) cuando está cerca de su familiar?",
-			"¿Cree que su situación actual afecta negativamente a su relación con otros miembros de su familia o amigos?",
-			"¿Siente temor por el futuro que le espera a su familiar?",
-			"¿Siente que su familiar depende de usted?",
-			"¿Se siente tenso cuando está cerca de su familiar?",
-			"¿Siente que su salud se ha resentido por cuidar a su familiar?",
-			"¿Siente que no tiene la vida privada que desearía a causa de su familiar?",
-			"¿Cree que su vida social se ha visto afectada por cuidar a su familiar?",
-			"¿Se siente incómodo por desatender a sus amistades debido a su familiar?",
-			"¿Siente que su familiar espera que usted le cuide, como si usted fuera la única persona de quien depende?",
-			"¿Siente que no dispone de suficiente dinero para cuidar a su familiar además de sus otros gastos?",
-			"¿Cree que será incapaz de cuidarle/a por mucho más tiempo?",
-			"¿Siente que ha perdido el control de su vida desde la enfermedad de su familiar?",
-			"¿Desearía poder encargar el cuidado de su familiar a otra persona?",
-			"¿Se siente inseguro(a) sobre que hacer con su familiar?",
-			"¿Siente que debería hacer más de lo que hace por su familiar?",
-			"¿Cree que podría cuidar mejor a su familiar mejor de lo que hace?",
-			"En general ¿se siente muy sobrecargado al tener que cuidar de su familiar?"};
+	String[] question = {"1. ¿Siente que su familiar le pide más ayuda de la que realmente necesita?", 
+			"2. ¿Siente que debido al tiempo que dedica a su familiar no tiene suficiente tiempo para usted?",
+			"3. ¿Se siente agobiado entre cuidar a su familiar y tratar de cumplir otras responsabilidades en su trabajo o su familia?",
+			"4. ¿Se siente avergonzado por la conducta de su familiar?",
+			"5. ¿Se siente irritado(a) (molesto) cuando está cerca de su familiar?",
+			"6. ¿Cree que su situación actual afecta negativamente a su relación con otros miembros de su familia o amigos?",
+			"7. ¿Siente temor por el futuro que le espera a su familiar?",
+			"8. ¿Siente que su familiar depende de usted?",
+			"9. ¿Se siente tenso cuando está cerca de su familiar?",
+			"10. ¿Siente que su salud se ha resentido por cuidar a su familiar?",
+			"11. ¿Siente que no tiene la vida privada que desearía a causa de su familiar?",
+			"12. ¿Cree que su vida social se ha visto afectada por cuidar a su familiar?",
+			"13. ¿Se siente incómodo por desatender a sus amistades debido a su familiar?",
+			"14. ¿Siente que su familiar espera que usted le cuide, como si usted fuera la única persona de quien depende?",
+			"15. ¿Siente que no dispone de suficiente dinero para cuidar a su familiar además de sus otros gastos?",
+			"16. ¿Cree que será incapaz de cuidarle/a por mucho más tiempo?",
+			"17. ¿Siente que ha perdido el control de su vida desde la enfermedad de su familiar?",
+			"18. ¿Desearía poder encargar el cuidado de su familiar a otra persona?",
+			"19. ¿Se siente inseguro(a) sobre que hacer con su familiar?",
+			"20. ¿Siente que debería hacer más de lo que hace por su familiar?",
+			"21. ¿Cree que podría cuidar mejor a su familiar mejor de lo que hace?",
+			"22. En general ¿se siente muy sobrecargado al tener que cuidar de su familiar?"};
 	
 	private LinearLayout mLnScroll;
 	private ListView mListView;
@@ -62,7 +63,9 @@ public class Encuesta extends Activity {
 	
 	private Button enviar;
 	String id;
-	
+    String tiempo;
+    Hilo thread;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,45 +77,17 @@ public class Encuesta extends Activity {
 		
         id = getIntent().getStringExtra("id_user");	
         
+        thread = new Hilo();
+        thread.start();
+        
         mLnScroll = (LinearLayout) findViewById(R.id.linear_scroll);
         mListView = (ListView) findViewById(R.id.listView1);
         
         dataList = new ArrayList<ItemPregunta>();
         myArrayListTemp = new ArrayList<ItemPregunta>();
         
-        enviar = (Button) findViewById(R.id.btnEnviar);
-        enviar.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v){
-				int score = 0;
-				for (int i = 0; i < dataList.size(); i++) {
-					score += dataList.get(i).getScore();
-				}
-				
-				try {
-					Conexion con = new Conexion(Encuesta.this);
-					con.abrir();
-					boolean status = con.setHistory(id, Integer.toString(score), date());
-					con.cerrar();
-					
-					if (status) {
-						Toast toast = Toast.makeText(getApplicationContext(), "Test enviado", Toast.LENGTH_SHORT);
-						toast.show();		
-						Intent i = new Intent (Encuesta.this, Bienvenido.class);
-						i.putExtra("id_user", id);
-						startActivity(i);
-					}else{
-						Toast toast = Toast.makeText(getApplicationContext(), "Error al enviar test", Toast.LENGTH_SHORT);
-						toast.show();						
-					}
+//        enviar = (Button) findViewById(R.id.btnEnviar);
 
-				} catch (Exception e) {
-					// TODO: handle exception
-					Toast toast = Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT);
-					toast.show();
-				}
-			}
-		});
         
         for (String  quest : question){
         	dataList.add(new ItemPregunta(quest));
@@ -143,10 +118,64 @@ public class Encuesta extends Activity {
 			btnPage.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v){
+					btnPage.setBackgroundColor(R.drawable.button_bg);
 					addItem(k);
 				}
 			});
 		}
+        final Button btnEnviar = new Button(Encuesta.this);
+        LayoutParams lp = new LinearLayout.LayoutParams(300,LayoutParams.WRAP_CONTENT);
+        btnEnviar.setTextColor(Color.WHITE);
+        btnEnviar.setBackground(new ColorDrawable(Color.parseColor("#3789E1")));
+        btnEnviar.setTextSize(22.0f);
+        btnEnviar.setId(10);
+        btnEnviar.setText("Enviar");
+		mLnScroll.addView(btnEnviar, lp);
+		
+         btnEnviar.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v){
+				int score = 0;
+				for (int i = 0; i < dataList.size(); i++) {
+					score += dataList.get(i).getScore();
+				}
+				
+				try {
+					thread.setPausado(true);
+					
+//					Toast toast = Toast.makeText(getApplicationContext(), thread.cron, Toast.LENGTH_SHORT);
+//					toast.show();
+					Conexion con = new Conexion(Encuesta.this);
+					con.abrir();
+					boolean status = con.setHistory(id, Integer.toString(score), date(), thread.getCrono());
+					con.cerrar();
+					
+					
+					if (status) {
+						Toast toast1 = Toast.makeText(getApplicationContext(), "Test enviado", Toast.LENGTH_SHORT);
+						toast1.show();		
+						Intent i = new Intent (Encuesta.this, Bienvenido.class);
+						i.putExtra("id_user", id);
+						
+						thread.setPausado(true);
+						thread.setCentesimas(0);
+						thread.setSegundos(0);
+						thread.setMinutos(0);
+						thread.setHoras(0); 
+
+						startActivity(i);
+					}else{
+						Toast toast1 = Toast.makeText(getApplicationContext(), "Error al enviar test", Toast.LENGTH_SHORT);
+						toast1.show();						
+					}
+
+				} catch (Exception e) {
+					// TODO: handle exception
+					Toast toast = Toast.makeText(getApplicationContext(),"hay " + e.toString(), Toast.LENGTH_SHORT);
+					toast.show();
+				}
+			}
+		});
     }
 
 

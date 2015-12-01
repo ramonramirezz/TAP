@@ -28,7 +28,7 @@ public class Bienvenido extends Activity implements OnClickListener, OnItemClick
 	String id;
     ListView historial;
 	ImageButton _nuevoTest ,hystory;
-	
+
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +55,7 @@ public class Bienvenido extends Activity implements OnClickListener, OnItemClick
 		
 		id = getIntent().getStringExtra("id_user");		
 		this.getNameUser(id);
+		
     }
 
 
@@ -88,7 +89,6 @@ public class Bienvenido extends Activity implements OnClickListener, OnItemClick
 		case R.id.tvScore:
 			this.getScoreHistory(id);
 			
-
 			break;
 
 

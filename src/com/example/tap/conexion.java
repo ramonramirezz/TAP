@@ -15,6 +15,7 @@ public class Conexion {
 	public static final String USUARIO = "usuario";
 	public static final String NOMBRE = "nombre";
 	public static final String CONTRA = "contrasenia";
+	public static final String TIEMPO = "tiempo";
 	
 	public static final String FECHA = "fecha";
 	public static final String SCORE = "score";
@@ -48,6 +49,7 @@ public class Conexion {
 					ID_SCORE + " INTEGER PRIMARY KEY AUTOINCREMENT, " +  
 					ID_USUARIO + " TEXT NOT NULL," + 
 					SCORE + " TEXT NOT NULL," + 
+					TIEMPO + " TEXT NOT NULL," +
 					FECHA + " TEXT NOT NULL);"
 					);
 			
@@ -124,7 +126,8 @@ public class Conexion {
 		if (c.moveToFirst()) {
 		     //Recorremos el cursor hasta que no haya más registros
 		     do {
-		    	 String item = c.getString(2) + " puntos " + c.getString(3);
+		    	 String item = c.getString(3);
+		    	 //String item = c.getString(2) + " puntos " + c.getString(3);
 		         registro.add(item); 
 		     } while(c.moveToNext());
 		}
@@ -150,7 +153,7 @@ public class Conexion {
 		return registro;
 	}
 	
-	public boolean setHistory(String id,String score, String fecha) {
+	public boolean setHistory(String id,String score, String fecha, String tiempo) {
 		// TODO Auto-generated method stub
 		boolean status;
 		try {
@@ -158,6 +161,7 @@ public class Conexion {
 			ContentValues cv = new ContentValues();
 			cv.put(ID_USUARIO, id);
 			cv.put(SCORE, score);
+			cv.put(TIEMPO, tiempo);
 			cv.put(FECHA, fecha);
 			nBD.insert(N_HISTORIAL, null, cv);
 			 status = true;
